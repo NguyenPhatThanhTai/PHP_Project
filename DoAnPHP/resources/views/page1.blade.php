@@ -10,13 +10,20 @@
     <h1>Page 1</h1>
     @foreach($testArray as $item)
         {{  "Key: " . $item -> Key }};<br>
-        {{  "Value: " . $item -> Value }};<br>
+        @foreach ($item -> Value as $ite)
+            {{"Detail: " . $ite -> Note}};<br>
+        @endforeach
+        <h3>==============</h3>
     @endforeach
+
+    {{ var_dump(json_encode($testArray))}}
 
     <form action="/page/test" method="post">
         @csrf
         <input name="id" placeholder="Id">
         <input type="submit" value="test">
-      </form>
+    </form>
+
+    <a href="/page/test?id={{"test"}}">click me</a>
 </body>
 </html>
