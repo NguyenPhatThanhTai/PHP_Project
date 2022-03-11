@@ -51,7 +51,7 @@ return [
                 'host' => '127.0.0.1'
             ),
             'driver'    => 'mysql',
-            'database'  => 'testhibernatejava',
+            'database'  => 'balo_shop',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',

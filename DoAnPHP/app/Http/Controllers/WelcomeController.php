@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class WelcomeController extends Controller
 {
     public function testControllerGet (Request $request){
-        $result = DB::select('select * from datatest');
+        $result = DB::select('select * from datatest'); 
         DB::insert('insert into datatest (Id, Name, Note) values (?, ?, ?)', array(date("s"), 'Dayle', 'test'));
 
         $testInArray = [(object) ["Detail" => "ok"], (object) ["Detail" => "ok"], (object) ["Detail" => "ok"], (object) ["Detail" => "ok"] ,(object) ["Detail" => "ok"]];

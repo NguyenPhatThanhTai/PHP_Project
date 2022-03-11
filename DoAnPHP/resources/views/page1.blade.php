@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    @php
+        require_once('/page1.blade.php');
+    @endphp
     <h1>Page 1</h1>
     @foreach($testArray as $item)
         {{  "Key: " . $item -> Key }};<br>
