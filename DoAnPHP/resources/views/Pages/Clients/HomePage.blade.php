@@ -163,7 +163,7 @@
                             </div>
                             <div class="product-card-info">
                                 <div class="product-btn">
-                                    <button class="btn-flat btn-hover btn-shop-now">xem ngay</button>
+                                    <button class="btn-flat btn-hover btn-shop-now"><a href="/Detail?prodId={{$item -> id}}">xem ngay</a></button>
                                     <button class="btn-flat btn-hover btn-cart-add">
                                         <i class='bx bxs-cart-add'></i>
                                     </button>
