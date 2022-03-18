@@ -19,6 +19,7 @@ Route::get('/', [ClientController::class, 'HomePageController']);
 Route::get('/Detail', [ClientController::class, 'DetailProductsController']);
 Route::get('/GetComment', [ClientController::class, 'GetCommentOfProduct']);
 Route::post('/SendComment', [ClientController::class, 'SendComment']);
+Route::get('/AllProducts', [ClientController::class, 'AllProduct']);
 
 Route::get('/page/test', [WelcomeController::class, 'testControllerGet']);
 

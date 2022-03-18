@@ -155,7 +155,6 @@
         })
         
         $("#sentComment").on("click", function(){
-            alert($("#comment-input").val());
             $.ajax({
                   type: 'POST',
                   contentType : 'application/json; charset=utf-8',
@@ -169,7 +168,7 @@
                   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                   success: function (data) {
                       data = JSON.parse(data);
-                      if(data.isSuccess){
+                      if(data.Message == "Success"){
                           getAllComment();
                       }
                       else{
@@ -191,7 +190,7 @@
                           
                           var startNumberRate = '';
                           
-                          for(var i = 0; i < item.start; i++){
+                          for(var i = 0; i < item.star; i++){
                               startNumberRate += '<i class="bx bxs-star"></i>';
                           }
                           

@@ -184,7 +184,7 @@
                 @endforeach
             </div>
             <div class="section-footer">
-                <a href="./products.html" class="btn-flat btn-hover">xem tất cả</a>
+                <a href="/AllProducts?offset=1" class="btn-flat btn-hover">xem tất cả</a>
             </div>
         </div>
     </div>

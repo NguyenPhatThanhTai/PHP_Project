@@ -5,9 +5,9 @@ namespace App\Service;
 use App\DataAccess\DataAccess;
 
 class Service{
-    public function GetRecommentProduct($Number){
+    public function GetRecommentProduct($amount){
         $_dataAccess = new DataAccess();
-        return $_dataAccess->GetProductByNumber($Number);
+        return $_dataAccess->GetProductByNumber(1, $amount, []);
     }
 
     public function GetDetailProducts($prodId){
@@ -26,5 +26,17 @@ class Service{
         $time = date("Y-m-d");
 
         return $_dataAccess->SendComment((int)$id, $content, $time, (int)$star, (int)$productId, 1);
+    }
+
+    public function GetAllCategory(){
+        $_dataAccess = new DataAccess();
+
+        return $_dataAccess->GetAllCategory();
+    }
+
+    public function GetAllProduct($offset,array $cateId){
+        $_dataAccess = new DataAccess();
+
+        return $_dataAccess->GetProductByNumber($offset, 10 , $cateId);
     }
 }
