@@ -39,4 +39,19 @@ class Service{
 
         return $_dataAccess->GetProductByNumber($offset, 10 , $cateId);
     }
+
+    // cart
+    public function AddToCart($productId, $quantity){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+        $time = date("Y-m-d");
+
+        return $_dataAccess->AddToCart((int)$id, (int)$productId, (int)$quantity, $time);
+    }
+
+    // admin login
+    public function GetAdmin($username, $password){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetAdmin($username, $password);
+    }
 }

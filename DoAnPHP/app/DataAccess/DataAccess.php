@@ -91,5 +91,32 @@ class DataAccess{
 
         return $Category;
     }
+
+    // cart
+    public function AddToCart($productId, $quantity){
+        try{
+            $id = date("dhis");
+            $time = date("Y-m-d");
+
+            $Send = DB::insert("
+            INSERT INTO `cart`(`id`, `product_id`, `quantity`, `time`)
+            VALUES (".$id.",".$productId.",".$quantity.",'".$time."')");   
     
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+    
+    // admin login
+    public function GetAdmin($username, $password){
+        try{
+            $Send = DB::selectOne("
+            SELECT * FROM `admin` WHERE `username` = '".$username."' AND `password` = '".$password."'");   
+    
+            return $Send;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }

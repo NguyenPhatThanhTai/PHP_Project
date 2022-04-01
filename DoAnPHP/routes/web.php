@@ -21,6 +21,9 @@ Route::get('/GetComment', [ClientController::class, 'GetCommentOfProduct']);
 Route::post('/SendComment', [ClientController::class, 'SendComment']);
 Route::get('/AllProducts', [ClientController::class, 'AllProduct']);
 
+// cart
+Route::get('/AddToCart', [ClientController::class, 'AddToCart']);
+
 Route::get('/page/test', [WelcomeController::class, 'testControllerGet']);
 
 Route::post('/page/test', [WelcomeController::class, 'testControllerPost']);
