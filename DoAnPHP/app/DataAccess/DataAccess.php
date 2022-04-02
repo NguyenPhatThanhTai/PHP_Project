@@ -119,4 +119,29 @@ class DataAccess{
             return false;
         }
     }
+
+    // login
+    public function GetCustomer($email, $token){
+        try{
+            $Send = DB::selectOne("
+            SELECT * FROM `customer` WHERE `email` = '".$email."' AND `token` = '".$token."'");   
+            
+            return $Send;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // register
+    public function PostCustomer($id, $email, $token, $phone, $name){
+        try{
+            $Send = DB::insert("
+            INSERT INTO `customer`(`id`, `name`, `email`, `token`, `phone`)
+            VALUES ('".$id."','".$name."','".$email."','".$token."','".$phone."')"); 
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }

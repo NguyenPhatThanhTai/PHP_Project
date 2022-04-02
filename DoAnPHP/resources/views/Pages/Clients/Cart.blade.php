@@ -119,5 +119,32 @@
             return false;
           });
       });
+
+      function addToCart(ProductId, Price, Img, Name){
+			$.ajax({
+				  type: 'POST',
+				  contentType : 'application/json; charset=utf-8',
+				  dataType : 'json',
+				  data: JSON.stringify({ 
+			        "productId": ProductId, 
+			        "number": 1,
+			        "action": 0,
+			        "price": Price,
+			        "image": Img,
+			        "name": Name
+			      }),
+				  url: 'addToCartJson',
+				  complete: function (data) {
+					  data = JSON.parse(data.responseText);
+					  
+					  if(data.isSuccess){
+						 alert("Đã thêm vào giỏ hàng tạm thời!");
+					  }
+					  else{
+						  alert("Thêm vào giỏ hàng thất bại!");
+					  }
+				  }
+			});	
+		}
 </script>
 @stop

@@ -54,4 +54,18 @@ class Service{
         $_dataAccess = new DataAccess();
         return $_dataAccess->GetAdmin($username, $password);
     }
+
+    // login
+    public function GetUser($username, $token){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetCustomer($username, $token);
+    }
+
+    public function PostUser($email, $token, $phone, $name){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+        $time = date("Y-m-d");
+
+        return $_dataAccess->PostCustomer((int)$id, $email, $token, $phone, $name, $time);
+    }
 }

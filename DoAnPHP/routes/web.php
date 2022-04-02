@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ClientController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +23,21 @@ Route::post('/SendComment', [ClientController::class, 'SendComment']);
 Route::get('/AllProducts', [ClientController::class, 'AllProduct']);
 
 // cart
-Route::get('/AddToCart', [ClientController::class, 'AddToCart']);
+Route::get('/Cart', [ClientController::class, 'Cart']);
+Route::post('/AddToCart', [ClientController::class, 'AddToCart']);
+
+// login
+Route::get('/FormLogin', [ClientController::class, 'LoginController']);
+Route::post('/FormLogin', [ClientController::class, 'postLogin']);
+
+// signup
+Route::get('/FormSignUp', [ClientController::class, 'SignUpController']);
+Route::post('/FormSignUp', [ClientController::class, 'postSignUp']);
 
 Route::get('/page/test', [WelcomeController::class, 'testControllerGet']);
 
 Route::post('/page/test', [WelcomeController::class, 'testControllerPost']);
+
 
 // Route::get('/page', function(){
 //     $data = (object) ["Num" => "Mot", "Num" => "Hai"];
