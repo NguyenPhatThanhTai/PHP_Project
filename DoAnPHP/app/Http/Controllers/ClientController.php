@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service\Service;
+use phpDocumentor\Reflection\Types\Boolean;
 use PhpParser\Node\Expr\Cast\Double;
+use \stdClass;
 
 session_start();
 
@@ -92,42 +94,43 @@ class ClientController extends Controller
 
     public function Cart(Request $request)
     {
-        if(isset($_SESSION['cart'])){
-            $ss_cart = unserialize($_SESSION['Cart']);
+        if (isset($_SESSION['cart'])) {
+            $arrayList = $_SESSION['cart'];
 
-            return view('Pages.Clients.Cart')->with('Cart', $ss_cart);
+            return view('Pages.Clients.Cart')->with('cart', $arrayList);
         }
-        return view('Pages.Clients.Cart')->with('Cart', null);
+        return view('Pages.Clients.Cart')->with('cart', []);
     }
 
     // cart
     public function AddToCart(Request $request)
     {
-        $ProductId = $request->get('prodId');
-        $ProductName = $request->get('prodName');
-        $ProductPrice = $request->get('prodPrice');
-        $ProductImage = $request->get('prodImage');
-        $ProductQuantity = $request->get('prodQuantity');
+        $isDefined = false;
+        if (isset($_SESSION['cart']) && sizeof($_SESSION['cart']) > 0) {
+            for ($i = 0; $i < sizeof($_SESSION['cart']) - 1; $i++) {
+                if ($_SESSION['cart'][$i]->productId == $request->post('productId')) {
+                    $isDefined = true;
+                    $_SESSION['cart'][$i]->number += $request->post('number');
+                }
+            }
 
-        $Product = (object) [
-            'ProductId' => $ProductId,
-            'ProductName' => $ProductName,
-            'ProductPrice' => $ProductPrice,
-            'ProductImage' => $ProductImage,
-            'ProductQuantity' => $ProductQuantity
-        ];
-
-        $Cart = session()->get('Cart');
-        if ($Cart == null) {
-            $Cart = [];
+            if (!$isDefined) {
+                $cart = new stdClass;
+                $cart->productId = $request->post('productId');
+                $cart->number = $request->post('number');
+                array_push($_SESSION['cart'], $cart);
+            }
+        } else {
+            $_SESSION['cart'] = [];
+            $cart = new stdClass;
+            $cart->productId = $request->post('productId');
+            $cart->number = $request->post('number');
+            array_push($_SESSION['cart'], $cart);
         }
-
-        array_push($Cart, $Product);
-        session()->put('Cart', $Cart);
 
         return response()->json('{
             "IsSuccess": "true",
-            "Message": "Success",
+            "Message": ' . sizeof($_SESSION['cart']) . ',
             "StatusCode": 200
         }');
     }
@@ -158,7 +161,7 @@ class ClientController extends Controller
     }
 
     // login
-    
+
     public function LoginController(Request $request)
     {
         return view('Pages.Clients.Signing');
@@ -174,7 +177,7 @@ class ClientController extends Controller
 
         if ($Customer != null) {
             session()->put('Customer', $Customer);
-            
+
             return redirect('/');
         }
         return view('Pages.Clients.Signing');
@@ -203,18 +206,18 @@ class ClientController extends Controller
         // }else{
         //     if ($Customer != null) {
         //         session()->put('Customer', $Customer);
-                
+
         //         return redirect('/');
         //     }else{
         //         return view('Pages.Clients.Register');
         //     }
         // }
-        
-        if ($Customer != null) {
+
+        if ($Customer) {
             session()->put('Customer', $Customer);
-            
+
             return redirect('/');
-        }else{
+        } else {
             return view('Pages.Clients.Register');
         }
     }

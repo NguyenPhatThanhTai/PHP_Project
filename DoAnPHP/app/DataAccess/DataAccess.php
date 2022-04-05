@@ -135,11 +135,16 @@ class DataAccess{
     // register
     public function PostCustomer($id, $email, $token, $phone, $name){
         try{
-            $Send = DB::insert("
-            INSERT INTO `customer`(`id`, `name`, `email`, `token`, `phone`)
-            VALUES ('".$id."','".$name."','".$email."','".$token."','".$phone."')"); 
-    
-            return true;
+            $checkMail = DB::selectOne("SELECT * FROM `customer` WHERE `email` = '".$email."'");
+            if($checkMail != null){
+                return false;
+            }else{
+                $Send = DB::insert("
+                INSERT INTO `customer`(`id`, `name`, `email`, `token`, `phone`)
+                VALUES ('".$id."','".$name."','".$email."','".$token."','".$phone."')"); 
+        
+                return $Send;
+            }
         }catch(Exception $e){
             return false;
         }

@@ -164,7 +164,7 @@
                             <div class="product-card-info">
                                 <div class="product-btn">
                                     <button class="btn-flat btn-hover btn-shop-now"><a href="/Detail?prodId={{$item -> id}}">xem ngay</a></button>
-                                    <button class="btn-flat btn-hover btn-cart-add">
+                                    <button class="btn-flat btn-hover btn-cart-add" onclick="addToCart('{{$item -> product_id}}', '{{$item -> img_cover}}', '{{$item -> price}}', '{{$item -> name}}')">
                                         <i class='bx bxs-cart-add'></i>
                                     </button>
                                     <button class="btn-flat btn-hover btn-cart-add">
@@ -299,4 +299,35 @@
 @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        function addToCart(ProductId, Price, Img, Name){
+			$.ajax({
+				  type: 'POST',
+				  contentType : 'application/json; charset=utf-8',
+				  data: JSON.stringify({ 
+                    "_token": "{{ csrf_token() }}",
+			        "productId": ProductId, 
+			        "number": 1,
+			        "action": 0,
+			        "price": Price,
+			        "image": Img,
+			        "name": Name
+			      }),
+				  url: 'AddToCart',
+				  success: function (data) {
+                      data = JSON.parse(data);
+                      console.log(data);
+                        
+                        if(data.IsSuccess == "true"){
+                            alert("Thêm vào giỏ hàng thành công");
+                        }
+                        else{
+                            alert("Thêm vào giỏ hàng thất bại");
+                        }
+				  }
+			});	
+		}
+    </script>
 @stop
