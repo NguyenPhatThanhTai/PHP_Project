@@ -94,12 +94,15 @@ class ClientController extends Controller
 
     public function Cart(Request $request)
     {
+        $arrayList = [];
+        $price = 0;
         if (isset($_SESSION['cart'])) {
             $arrayList = $_SESSION['cart'];
-
-            return view('Pages.Clients.Cart')->with('cart', $arrayList);
+            foreach($_SESSION['cart'] as $item){
+                $price += $item -> price * $item -> number;
+            }
         }
-        return view('Pages.Clients.Cart')->with('cart', []);
+        return view('Pages.Clients.Cart')->with('cart', $arrayList)->with('totalPrice', $price);
     }
 
     // cart

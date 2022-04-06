@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-12 col-md-12 col-sm-12">
             <div class="text-price">
-                <h3>Thành tiền: <span>1.000.000 VND</span></h3>
+                <h3>Thành tiền: <span id="totalPrice">0</span></h3>
                 <button class="btn-flat btn-hover complete-cart"><span>Đặt hàng</span></button>
             </div>
         </div>
@@ -62,6 +62,8 @@
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
+        calcuTotalPrice();
+
         $('.btn-minus').click(function() {
             var $input = $(this).parent().find('#ascending');
             var count = parseInt($input.val()) - 1;
@@ -86,6 +88,15 @@
         });
     });
 
+    function calcuTotalPrice(){
+        	var totalPrice = 0;
+        	$('.price').each(function() {
+        		totalPrice += Number($(this).val())
+        	});
+        	
+        	$("#totalPrice").html(String(totalPrice) + " VND");
+    }
+
     function addToCart(ProductId, Price, Img, Name, Action) {
         $.ajax({
             type: 'POST',
@@ -102,6 +113,7 @@
             url: 'AddToCart',
             success: function(data) {
                 data = JSON.parse(data);
+                calcuTotalPrice();
 
                 if (data.IsSuccess == "true") {
                     alert("Cập nhật giỏ hàng thành công!");
