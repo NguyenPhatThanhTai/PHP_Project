@@ -26,6 +26,9 @@ Route::get('/AllProducts', [ClientController::class, 'AllProduct']);
 Route::get('/Cart', [ClientController::class, 'Cart']);
 Route::post('/AddToCart', [ClientController::class, 'AddToCart']);
 
+//check-out
+Route::get('/Order', [ClientController::class, 'checkOutPage']);
+
 // login
 Route::get('/FormLogin', [ClientController::class, 'LoginController']);
 Route::post('/FormLogin', [ClientController::class, 'postLogin']);

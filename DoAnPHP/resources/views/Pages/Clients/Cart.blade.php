@@ -23,7 +23,6 @@
 
 @section('content')
 <!-- promotion section -->
-{{print_r($cart)}}
 
 @foreach($cart as $item)
 <div class="promo-parent">
@@ -33,16 +32,13 @@
                 <div class="promotion-box">
                     <div class="text">
                         <h3>Số lượng</h3>
-                        <button class="btn-minus btn-hover"><span>-</span></button>
+                        <button class="btn-minus btn-hover" onclick="addToCart({{$item -> productId}}, null, null, null, -1)"><span>-</span></button>
                         <input id="ascending" type="number" value="{{$item -> number}}">
-                        <button class="btn-plus btn-hover"><span>+</span></button>
-                        <h3 class="text-all-price">Tổng tiền: <span class="bg-color-price"><input class="price" type="number" value="300000"></span></h3>
-                        <input class="hiddenprice" type="hidden" value="300000">
+                        <button class="btn-plus btn-hover" onclick="addToCart({{$item -> productId}}, null, null, null, 0)"><span>+</span></button>
+                        <h3 class="text-all-price">Tổng tiền: <span class="bg-color-price"><input class="price" type="number" value="{{$item -> number * $item -> price}}"></span></h3>
+                        <input class="hiddenprice" type="hidden" value="{{$item -> price}}">
                     </div>
-                    <img src="./images/bag7.jpg" alt="">
-                    <div class="product-name">
-
-                    </div>
+                    <img src="{{$item -> image}}" alt="">
                 </div>
             </div>
         </div>
@@ -90,27 +86,27 @@
         });
     });
 
-    function addToCart(ProductId, Price, Img, Name) {
+    function addToCart(ProductId, Price, Img, Name, Action) {
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
             data: JSON.stringify({
+                "_token": "{{ csrf_token() }}",
                 "productId": ProductId,
                 "number": 1,
-                "action": 0,
+                "action": Action,
                 "price": Price,
                 "image": Img,
                 "name": Name
             }),
-            url: 'addToCartJson',
-            complete: function(data) {
-                data = JSON.parse(data.responseText);
+            url: 'AddToCart',
+            success: function(data) {
+                data = JSON.parse(data);
 
-                if (data.isSuccess) {
-                    alert("Đã thêm vào giỏ hàng tạm thời!");
+                if (data.IsSuccess == "true") {
+                    alert("Cập nhật giỏ hàng thành công!");
                 } else {
-                    alert("Thêm vào giỏ hàng thất bại!");
+                    alert("Cập nhật giỏ hàng thất bại!");
                 }
             }
         });

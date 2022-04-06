@@ -107,17 +107,29 @@ class ClientController extends Controller
     {
         $isDefined = false;
         if (isset($_SESSION['cart']) && sizeof($_SESSION['cart']) > 0) {
-            for ($i = 0; $i < sizeof($_SESSION['cart']) - 1; $i++) {
+            for ($i = 0; $i < sizeof($_SESSION['cart']); $i++) {
                 if ($_SESSION['cart'][$i]->productId == $request->post('productId')) {
                     $isDefined = true;
-                    $_SESSION['cart'][$i]->number += $request->post('number');
+                    if($request->post('action') == 0){
+                        $_SESSION['cart'][$i]->number += $request->post('number');
+                        
+                    }
+                    else {
+                        $_SESSION['cart'][$i]->number -= $request->post('number');
+                        if($_SESSION['cart'][$i]->number == 0){
+                            unset($_SESSION['cart'][$i]);
+                        }
+                    }
                 }
             }
 
-            if (!$isDefined) {
+            if ($isDefined == false) {
                 $cart = new stdClass;
                 $cart->productId = $request->post('productId');
                 $cart->number = $request->post('number');
+                $cart->price = $request->post('price');
+                $cart->image = $request->post('image');
+                $cart->name = $request->post('name');
                 array_push($_SESSION['cart'], $cart);
             }
         } else {
@@ -125,6 +137,9 @@ class ClientController extends Controller
             $cart = new stdClass;
             $cart->productId = $request->post('productId');
             $cart->number = $request->post('number');
+            $cart->price = $request->post('price');
+            $cart->image = $request->post('image');
+            $cart->name = $request->post('name');
             array_push($_SESSION['cart'], $cart);
         }
 
@@ -200,19 +215,6 @@ class ClientController extends Controller
         $_serviceController = new Service();
         $Customer = $_serviceController->PostUser($username, $token, $phone, $name);
 
-        // check email ton tai nhung lam deo duoc
-        // if($Customer::where('email', $username)->exists()){
-        //     echo "Email đã tồn tại";
-        // }else{
-        //     if ($Customer != null) {
-        //         session()->put('Customer', $Customer);
-
-        //         return redirect('/');
-        //     }else{
-        //         return view('Pages.Clients.Register');
-        //     }
-        // }
-
         if ($Customer) {
             session()->put('Customer', $Customer);
 
@@ -220,5 +222,19 @@ class ClientController extends Controller
         } else {
             return view('Pages.Clients.Register');
         }
+    }
+
+    //check-out
+    public function checkOutPage(){
+        $arrayList = [];
+        $price = 0;
+        if (isset($_SESSION['cart'])) {
+            $arrayList = $_SESSION['cart'];
+            foreach($_SESSION['cart'] as $item){
+                $price += $item -> price * $item -> number;
+            }
+        }
+
+        return view('Pages.Clients.order')->with('cart', $arrayList)->with('totalPrice', $price);
     }
 }

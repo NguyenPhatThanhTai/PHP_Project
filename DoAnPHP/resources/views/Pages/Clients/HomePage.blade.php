@@ -164,7 +164,7 @@
                             <div class="product-card-info">
                                 <div class="product-btn">
                                     <button class="btn-flat btn-hover btn-shop-now"><a href="/Detail?prodId={{$item -> id}}">xem ngay</a></button>
-                                    <button class="btn-flat btn-hover btn-cart-add" onclick="addToCart('{{$item -> product_id}}', '{{$item -> img_cover}}', '{{$item -> price}}', '{{$item -> name}}')">
+                                    <button class="btn-flat btn-hover btn-cart-add" onclick="addToCart('{{$item -> product_id}}', '{{$item -> price}}', '{{$item -> img_cover}}', '{{$item -> name}}')">
                                         <i class='bx bxs-cart-add'></i>
                                     </button>
                                     <button class="btn-flat btn-hover btn-cart-add">

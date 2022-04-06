@@ -1,6 +1,6 @@
 @extends('Layout.Client')
 
-@section('title', 'DTT Store - Xác nhận đơn hàng)
+@section('title', 'DTT Store - Xác nhận đơn hàng')
 
 @section('style-libraries')
     <meta charset="UTF-8">
@@ -32,37 +32,20 @@
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Giỏ hàng của bạn</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            <span class="badge bg-primary rounded-pill">{{sizeof($cart)}}</span>
           </h4>
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Balo KEY Gradient</h6>
-              </div>
-              <span class="text-muted">300000 VND</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                    <h6 class="my-0">Balo KEY Gradient</h6>
-                </div>
-                  <span class="text-muted">300000 VND</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                    <h6 class="my-0">Balo KEY Gradient</h6>
-                </div>
-                  <span class="text-muted">300000 VND</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Mã giảm giá</h6>
-                <small>CHAOEM2022</small>
-              </div>
-              <span class="text-success">-5000 VND</span>
-            </li>
+              @foreach($cart as $item)
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">{{$item -> name}}</h6>
+                  </div>
+                  <span class="text-muted">{{$item -> price * $item -> number}}</span>
+                </li>
+              @endforeach
             <li class="list-group-item d-flex justify-content-between">
               <span>Tổng (USD)</span>
-              <strong>900000 VND</strong>
+              <strong>{{$totalPrice}} VND</strong>
             </li>
           </ul>
   
