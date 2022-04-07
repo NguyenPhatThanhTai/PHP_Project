@@ -124,7 +124,7 @@ class DataAccess{
     public function GetCustomer($email, $token){
         try{
             $Send = DB::selectOne("
-            SELECT * FROM `customer` WHERE `email` = '".$email."' AND `token` = '".$token."'");   
+            SELECT * FROM `customer` WHERE `email` = '".$email."' AND `token` = '".$token."'"); 
             
             return $Send;
         }catch(Exception $e){
@@ -148,5 +148,20 @@ class DataAccess{
         }catch(Exception $e){
             return false;
         }
+    }
+
+    // order
+    public function postOrderDb($id, $time, $name_receive, $phone_receive, $address_receive, $note, $status, $total_price, $customerId, $ListQuantity, $ListProductId){
+
+            $Send = DB::insert("INSERT INTO `orders`(`id`, `time`, `name_receive`, `phone_receive`, `address_receive`, `note`, `status`, `total_price`, `customer_id`) 
+            VALUES ('".$id."','".$time."','".$name_receive."','".$phone_receive."','".$address_receive."','".$note."','".$status."','".$total_price."','".$customerId."')");
+            
+            for($i = 0; $i < count($ListProductId); $i++){
+                DB::insert("INSERT INTO `detail_orders`(`orders_id`, `product_id`, `quantity`, `size`) 
+                VALUES ('".$id."','".$ListProductId[$i]."','".$ListQuantity[$i]."',null)");
+            }
+
+            return $Send;
+
     }
 }

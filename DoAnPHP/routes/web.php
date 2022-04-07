@@ -28,6 +28,7 @@ Route::post('/AddToCart', [ClientController::class, 'AddToCart']);
 
 //check-out
 Route::get('/Order', [ClientController::class, 'checkOutPage']);
+Route::post('/Order', [ClientController::class, 'checkOutPost']);
 
 // login
 Route::get('/FormLogin', [ClientController::class, 'LoginController']);

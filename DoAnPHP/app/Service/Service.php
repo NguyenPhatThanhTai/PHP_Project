@@ -60,4 +60,13 @@ class Service{
 
         return $_dataAccess->PostCustomer((int)$id, $email, $token, $phone, $name, $time);
     }
+
+    // order
+    public function PostOrder($name_receive, $phone_receive, $address_receive, $note, $status, $total_price, $customerId, $ListQuantity, $ListProductId){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+        $time = date("Y-m-d");
+
+        return $_dataAccess->postOrderDb((int)$id, $time, $name_receive, $phone_receive, $address_receive, $note, $status, $total_price, $customerId, $ListQuantity, $ListProductId);
+    }
 }

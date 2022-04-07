@@ -194,14 +194,14 @@ class ClientController extends Controller
         $Customer = $_serviceController->GetUser($username, $token);
 
         if ($Customer != null) {
-            session()->put('Customer', $Customer);
+            $_SESSION['Customer'] = $Customer;
 
             return redirect('/');
         }
         return view('Pages.Clients.Signing');
     }
 
-    // sign in
+    // sign up
 
     public function SignUpController(Request $request)
     {
@@ -219,7 +219,7 @@ class ClientController extends Controller
         $Customer = $_serviceController->PostUser($username, $token, $phone, $name);
 
         if ($Customer) {
-            session()->put('Customer', $Customer);
+            $_SESSION['Customer'] = $Customer;
 
             return redirect('/');
         } else {
@@ -229,15 +229,39 @@ class ClientController extends Controller
 
     //check-out
     public function checkOutPage(){
-        $arrayList = [];
-        $price = 0;
-        if (isset($_SESSION['cart'])) {
-            $arrayList = $_SESSION['cart'];
-            foreach($_SESSION['cart'] as $item){
-                $price += $item -> price * $item -> number;
+        if(isset($_SESSION['Customer'])){
+            $arrayList = [];
+            $price = 0;
+            if (isset($_SESSION['cart'])) {
+                $arrayList = $_SESSION['cart'];
+                foreach($_SESSION['cart'] as $item){
+                    $price += $item -> price * $item -> number;
+                }
             }
+    
+            return view('Pages.Clients.order')->with('cart', $arrayList)->with('totalPrice', $price);
+        }else {
+            return view('Pages.Clients.Signing');
         }
+    }
 
-        return view('Pages.Clients.order')->with('cart', $arrayList)->with('totalPrice', $price);
+    public function checkOutPost(Request $request){
+        $_serviceController = new Service();
+        $time = date('d-m-Y');
+        $address = $request->input('address');
+        $phone = $request->input('phone');
+        $name = $request->input('name');
+        $note = $request->input('note');
+        $status = 0;
+        $totalPrice = $request->input('totalPrice');
+
+        $customerId = $_SESSION['Customer']->id;
+        $ListQuantity[] = $request->input('ListQuantity');
+        $ListProductId[] = $request->input('ListProductId');
+
+        if($_serviceController->PostOrder($name, $phone, $address, $note, $status, $totalPrice, $customerId, $ListQuantity, $ListProductId, $time)){
+            return redirect('/');
+        }
+        return redirect('/');
     }
 }
