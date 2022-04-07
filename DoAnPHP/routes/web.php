@@ -30,6 +30,9 @@ Route::post('/AddToCart', [ClientController::class, 'AddToCart']);
 Route::get('/Order', [ClientController::class, 'checkOutPage']);
 Route::post('/Order', [ClientController::class, 'checkOutPost']);
 
+// thank you
+Route::get('/ThankYou', [ClientController::class, 'thankYouPage']);
+
 // login
 Route::get('/FormLogin', [ClientController::class, 'LoginController']);
 Route::post('/FormLogin', [ClientController::class, 'postLogin']);

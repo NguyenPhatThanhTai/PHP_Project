@@ -260,8 +260,13 @@ class ClientController extends Controller
         $ListProductId[] = $request->input('ListProductId');
 
         if($_serviceController->PostOrder($name, $phone, $address, $note, $status, $totalPrice, $customerId, $ListQuantity, $ListProductId, $time)){
-            return redirect('/');
+            return redirect('/ThankYou');
         }
-        return redirect('/');
+        return redirect('/Order');
+    }
+
+    // thank you
+    public function thankYouPage(){
+        return view('Pages.Clients.Thankyou');
     }
 }
