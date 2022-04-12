@@ -18,10 +18,10 @@
 			<li>
 				<a href="#"><i class='bx bxs-inbox icon' ></i> Quản lý <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="#">Sản phẩm</a></li>
-					<li><a href="#">Loại sản phẩm</a></li>
-					<li><a href="#">Nhà sản xuất</a></li>
-					<li><a href="#">Đơn hàng</a></li>
+					<li><a href="{{ url('ProductManagement')}}">Sản phẩm</a></li>
+					<li><a href="{{ url('CategoryManagement')}}">Loại sản phẩm</a></li>
+					<li><a href="{{ url('ManufactorManagement')}}">Nhà phân phối</a></li>
+					<li><a href="{{ url('OrderManagement')}}">Đơn hàng</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><i class='bx bxs-chart icon' ></i> Nhân sự</a></li>

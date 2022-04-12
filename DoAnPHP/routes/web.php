@@ -54,10 +54,34 @@ Route::post('/FormLoginAdmin', [AdminController::class, 'postLoginAdmin']);
 Route::get('/ProductManagement', [AdminController::class, 'ProductManagement']);
 Route::post('/ProductManagement', [AdminController::class, 'postProductManagement']);
 
+// edit product
 Route::get('/GetProductJson', [AdminController::class, 'GetProductJson']);
 Route::post('/PostProductEdit', [AdminController::class, 'PostProductEdit']);
 
+// delete product
 Route::post('/PostProductDelete', [AdminController::class, 'PostProductDelete']);
+
+// category management
+Route::get('/CategoryManagement', [AdminController::class, 'CategoryManagement']);
+Route::post('/CategoryManagement', [AdminController::class, 'postCategoryManagement']);
+
+// edit category
+Route::get('/EditCategory', [AdminController::class, 'EditCategory']);
+Route::post('/EditCategory', [AdminController::class, 'postEditCategory']);
+
+// delete category
+Route::post('/DeleteCategory', [AdminController::class, 'DeleteCategory']);
+
+// manufactor management
+Route::get('/ManufactorManagement', [AdminController::class, 'ManufactorManagement']);
+Route::post('/ManufactorManagement', [AdminController::class, 'postManufactorManagement']);
+
+// edit manufactor
+Route::get('/EditManufactor', [AdminController::class, 'EditManufactor']);
+Route::post('/EditManufactor', [AdminController::class, 'postEditManufactor']);
+
+// delete manufactor
+Route::post('/DeleteManufactor', [AdminController::class, 'DeleteManufactor']);
 
 // Route::get('/page', function(){
 //     $data = (object) ["Num" => "Mot", "Num" => "Hai"];

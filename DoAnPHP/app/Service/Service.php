@@ -100,4 +100,54 @@ class Service{
         $_dataAccess = new DataAccess();
         return $_dataAccess->DeleteProduct($id);
     }
+
+    // add category
+    public function AddCategory($name){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+
+        return $_dataAccess->AddCategoryAdmin((int)$id, $name);
+    }
+
+    // update category
+    public function GetCategory($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetCategory($id);
+    }
+
+    public function EditCategory($id, $name){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->EditCategoryAdmin((int)$id, $name);
+    }
+
+    // delete category
+    public function DeleteCategory($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->DeleteCategory($id);
+    }
+
+    // add manufactor
+    public function AddManufactor($name){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+
+        return $_dataAccess->AddManufactorAdmin((int)$id, $name);
+    }
+
+    // update category
+    public function GetManufactor($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetManufactor($id);
+    }
+
+    public function EditManufactor($id, $name){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->EditManufactorAdmin((int)$id, $name);
+    }
+
+    // delete category
+    public function DeleteManufactor($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->DeleteManufactor($id);
+    }
 }

@@ -234,4 +234,91 @@ class DataAccess{
         }
     }
 
+    // add category
+    public function AddCategoryAdmin($id, $name){
+        try{
+            $category = DB::insert("INSERT INTO `category`(`id`, `name`, `status`) VALUES ('".$id."','".$name."','0')");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // update category
+    public function GetCategory($id){
+        $Category = DB::selectOne("
+        SELECT category.id as 'CategoryId',
+        category.name as 'CategoryName',
+        category.status as 'CategoryStatus'
+            from category 
+                where category.id = " . $id );
+
+        return $Category; 
+    }
+
+    public function EditCategoryAdmin($id, $name){
+        try{
+            $category = DB::update("UPDATE `category` SET `name` = '".$name."' WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // delete category
+    public function DeleteCategory($id){
+        try{
+            $category = DB::update("UPDATE `category` SET `status` = '-1' WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // add manufactor
+    public function AddManufactorAdmin($id, $name){
+        try{
+            $manufactor = DB::insert("INSERT INTO `manufacturers`(`id`, `name`, `status`) VALUES ('".$id."','".$name."','0')");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // update manufactor
+    public function GetManufactor($id){
+        $Manufactor = DB::selectOne("
+        SELECT manufacturers.id as 'ManufactorId',
+        manufacturers.name as 'ManufactorName',
+        manufacturers.status as 'ManufactorStatus'
+            from manufacturers 
+                where manufacturers.id = " . $id );
+
+        return $Manufactor; 
+    }
+
+    public function EditManufactorAdmin($id, $name){
+        try{
+            $manufactor = DB::update("UPDATE `manufacturers` SET `name` = '".$name."' WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // delete manufactor
+    public function DeleteManufactor($id){
+        try{
+            $manufactor = DB::update("UPDATE `manufacturers` SET `status` = '-1' WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }

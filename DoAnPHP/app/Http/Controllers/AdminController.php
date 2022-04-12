@@ -80,7 +80,7 @@ class AdminController extends Controller
 
             $AddProduct = $_serviceController->AddProduct($ProductName, $ProductDescription, $ProductPrice, $ProductImgCover, $ProductImgHover, $ProductImgDetail1, $ProductImgDetail2, $ProductImgDetail3, $ProductImgDetail4, $ProductManufactor, $ProductCategory);
             if($AddProduct)
-                return view('Pages.Admin.ProductManagement');
+                return redirect('/ProductManagement');
 
             return view('Pages.Admin.AdminDashboard');
         }
@@ -150,6 +150,190 @@ class AdminController extends Controller
             $DeleteProduct = $_serviceController->DeleteProduct($ProductId);
             if($DeleteProduct)
                 return redirect('/ProductManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // category management
+    public function CategoryManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $AllCategory = $_serviceController->GetAllCategory();
+
+            return view('Pages.Admin.CategoryManagement')
+                ->with('AllCategory', $AllCategory);
+        }
+    }
+
+    // add category
+    public function postCategoryManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $CategoryName = $request->post('name');
+
+            $AddCategory = $_serviceController->AddCategory($CategoryName);
+            if($AddCategory)
+                return redirect('/CategoryManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // edit category
+    public function EditCategory(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $CategoryId = $request->get('id');
+            $Category = $_serviceController->GetCategory($CategoryId);
+
+            return response()->json($Category);
+        }
+    }
+
+    public function postEditCategory(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $CategoryId = $request->post('CategoryId');
+            $CategoryName = $request->post('name');
+
+            $EditCategory = $_serviceController->EditCategory($CategoryId, $CategoryName);
+            if($EditCategory)
+                return redirect('/CategoryManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // delete category
+    public function DeleteCategory(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $CategoryId = $request->post('id');
+
+            $DeleteCategory = $_serviceController->DeleteCategory($CategoryId);
+            if($DeleteCategory)
+                return redirect('/CategoryManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // manufactor management
+    public function ManufactorManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $AllManufactor = $_serviceController->GetAllManufactor();
+
+            return view('Pages.Admin.ManufactorManagement')
+                ->with('AllManufactor', $AllManufactor);
+        }
+    }
+
+    // add manufactor
+    public function postManufactorManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $ManufactorName = $request->post('name');
+
+            $AddManufactor = $_serviceController->AddManufactor($ManufactorName);
+            if($AddManufactor)
+                return redirect('/ManufactorManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // edit manufactor
+    public function EditManufactor(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $ManufactorId = $request->get('id');
+            $Manufactor = $_serviceController->GetManufactor($ManufactorId);
+
+            return response()->json($Manufactor);
+        }
+    }
+
+    public function postEditManufactor(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $ManufactorId = $request->post('ManufactorId');
+            $ManufactorName = $request->post('name');
+
+            $EditManufactor = $_serviceController->EditManufactor($ManufactorId, $ManufactorName);
+            if($EditManufactor)
+                return redirect('/ManufactorManagement');
+
+            return view('Pages.Admin.AdminDashboard');
+        }
+    }
+
+    // delete manufactor
+    public function DeleteManufactor(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $ManufactorId = $request->post('id');
+
+            $DeleteManufactor = $_serviceController->DeleteManufactor($ManufactorId);
+            if($DeleteManufactor)
+                return redirect('/ManufactorManagement');
 
             return view('Pages.Admin.AdminDashboard');
         }
