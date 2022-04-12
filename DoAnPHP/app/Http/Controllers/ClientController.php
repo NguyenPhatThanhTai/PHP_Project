@@ -153,31 +153,6 @@ class ClientController extends Controller
         }');
     }
 
-    // admin login
-    public function AdminLogin(Request $request)
-    {
-        $UserName = $request->get('UserName');
-        $Password = $request->get('Password');
-
-        $_serviceController = new Service();
-        $Admin = $_serviceController->GetAdmin($UserName, $Password);
-
-        if ($Admin != null) {
-            session()->put('Admin', $Admin);
-            return response()->json('{
-                "IsSuccess": "true",
-                "Message": "Success",
-                "StatusCode": 200
-            }');
-        } else {
-            return response()->json('{
-                "IsSuccess": "false",
-                "Message": "Failed",
-                "StatusCode": 200
-            }');
-        }
-    }
-
     // login
 
     public function LoginController(Request $request)
@@ -269,4 +244,5 @@ class ClientController extends Controller
     public function thankYouPage(){
         return view('Pages.Clients.Thankyou');
     }
+
 }

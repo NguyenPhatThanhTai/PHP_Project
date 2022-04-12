@@ -33,6 +33,12 @@ class Service{
 
         return $_dataAccess->GetAllCategory();
     }
+    
+    public function GetAllManufactor(){
+        $_dataAccess = new DataAccess();
+
+        return $_dataAccess->GetAllManufactor();
+    }
 
     public function GetAllProduct($offset,array $cateId){
         $_dataAccess = new DataAccess();
@@ -40,11 +46,10 @@ class Service{
         return $_dataAccess->GetProductByNumber($offset, 10 , $cateId);
     }
 
-
     // admin login
-    public function GetAdmin($username, $password){
+    public function GetAdmin($email, $password){
         $_dataAccess = new DataAccess();
-        return $_dataAccess->GetAdmin($username, $password);
+        return $_dataAccess->GetAdmin($email, $password);
     }
 
     // login
@@ -68,5 +73,31 @@ class Service{
         $time = date("Y-m-d");
 
         return $_dataAccess->postOrderDb((int)$id, $time, $name_receive, $phone_receive, $address_receive, $note, $status, $total_price, $customerId, $ListQuantity, $ListProductId);
+    }
+
+    // add product
+    public function AddProduct($name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category){
+        $_dataAccess = new DataAccess();
+        $id = date("dhis");
+        $idDetail = date("dhis");
+
+        return $_dataAccess->AddProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category, );
+    }
+
+    // update product
+    public function GetProduct($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetProduct($id);
+    }
+
+    public function EditProduct($id, $idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->EditProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category);
+    }
+
+    // delete product
+    public function DeleteProduct($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->DeleteProduct($id);
     }
 }

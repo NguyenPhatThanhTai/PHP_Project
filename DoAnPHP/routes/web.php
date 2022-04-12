@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -45,6 +46,18 @@ Route::get('/page/test', [WelcomeController::class, 'testControllerGet']);
 
 Route::post('/page/test', [WelcomeController::class, 'testControllerPost']);
 
+// login admin
+Route::get('/FormLoginAdmin', [AdminController::class, 'LoginAdminController']);
+Route::post('/FormLoginAdmin', [AdminController::class, 'postLoginAdmin']);
+
+// product management
+Route::get('/ProductManagement', [AdminController::class, 'ProductManagement']);
+Route::post('/ProductManagement', [AdminController::class, 'postProductManagement']);
+
+Route::get('/GetProductJson', [AdminController::class, 'GetProductJson']);
+Route::post('/PostProductEdit', [AdminController::class, 'PostProductEdit']);
+
+Route::post('/PostProductDelete', [AdminController::class, 'PostProductDelete']);
 
 // Route::get('/page', function(){
 //     $data = (object) ["Num" => "Mot", "Num" => "Hai"];

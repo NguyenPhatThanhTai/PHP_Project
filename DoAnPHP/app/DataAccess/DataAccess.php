@@ -24,7 +24,7 @@ class DataAccess{
             INNER JOIN category 
                 ON product.category_id = category.id
             INNER JOIN product_detail
-                ON product.id = product_detail.product_id";
+                ON product.id = product_detail.product_id where product_detail.status = 0";
 
         if($cateId != null && count($cateId) == 1){
             $Query .= ' WHERE product.category_id = ' . str_replace("\\s+", "", $cateId[0]);
@@ -92,6 +92,12 @@ class DataAccess{
         return $Category;
     }
 
+    public function GetAllManufactor(){
+        $Manufactor = DB::select("select * from manufacturers");
+
+        return $Manufactor;
+    }
+
     // cart
     public function AddToCart($productId, $quantity){
         try{
@@ -109,10 +115,10 @@ class DataAccess{
     }
     
     // admin login
-    public function GetAdmin($username, $password){
+    public function GetAdmin($email, $password){
         try{
             $Send = DB::selectOne("
-            SELECT * FROM `admin` WHERE `username` = '".$username."' AND `password` = '".$password."'");   
+            SELECT * FROM `admin` WHERE `email` = '".$email."' AND `password` = '".$password."'");   
     
             return $Send;
         }catch(Exception $e){
@@ -162,6 +168,70 @@ class DataAccess{
             }
 
             return $Send;
-
     }
+
+    // add product
+    public function AddProductAdmin($id, $idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $categoryId, $manufacturersId){
+        try{
+            $product = DB::insert("INSERT INTO `product`(`id`, `manufacturers_id`, `category_id`) 
+            VALUES ('".$id."','".$manufacturersId."','".$categoryId."')");
+
+            $product_detail = DB::insert("INSERT INTO `product_detail`(`id`, `name`, `description`, `price`, `img_cover`, `img_hover`, `img_detail1`, `img_detail2`, `img_detail3`, `img_detail4`, `quantity_in_shop`, `status`, `product_id`) 
+            VALUES ('".$idDetail."','".$name."','".$description."','".$price."','".$img_cover."','".$img_hover."','".$img_detail1."','".$img_detail2."','".$img_detail3."','".$img_detail4."','".null."','0','" .$id."')");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // update product
+    public function GetProduct($id){
+        $Product = DB::selectOne("
+        SELECT product.id as 'ProductId',
+        product_detail.id as 'ProductDetailId',
+        product_detail.name as 'ProductName',
+        product_detail.description as 'ProductDescription',
+        product_detail.price as 'ProductPrice',
+        product_detail.img_cover as 'ProductImgCover',
+        product_detail.img_hover as 'ProductImgHover',
+        product_detail.img_detail1 as 'ProductImgDetail1',
+        product_detail.img_detail2 as 'ProductImgDetail2',
+        product_detail.img_detail3 as 'ProductImgDetail3',
+        product_detail.img_detail4 as 'ProductImgDetail4',
+        product_detail.quantity_in_shop as 'ProductQuantityInShop',
+        product_detail.status as 'ProductStatus',
+        product.category_id as 'ProductCategoryId',
+        product.manufacturers_id as 'ProductManufacturersId'
+            from product 
+                INNER JOIN product_detail
+                ON product.id = product_detail.product_id
+                where product.id = " . $id );
+
+        return $Product; 
+    }
+
+    public function EditProductAdmin($id, $idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $categoryId, $manufacturersId){
+        try{
+            $product = DB::update("UPDATE `product` SET `category_id` = '".$categoryId."', `manufacturers_id` = '".$manufacturersId."' WHERE `id` = '".$id."'");
+
+            $product_detail = DB::update("UPDATE `product_detail` SET `name` = '".$name."', `description` = '".$description."', `price` = '".$price."', `img_cover` = '".$img_cover."', `img_hover` = '".$img_hover."', `img_detail1` = '".$img_detail1."', `img_detail2` = '".$img_detail2."', `img_detail3` = '".$img_detail3."', `img_detail4` = '".$img_detail4."' WHERE `id` = '".$idDetail."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // delete product
+    public function DeleteProduct($id){
+        try{
+            $product_detail = DB::update("UPDATE `product_detail` SET `status` = '-1' WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
 }
