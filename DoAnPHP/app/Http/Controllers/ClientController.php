@@ -223,7 +223,7 @@ class ClientController extends Controller
     public function checkOutPost(Request $request){
         $_serviceController = new Service();
         $time = date('d-m-Y');
-        $address = $request->input('address');
+        $address = $request->input('address') . " " . $request->input('District') . " " . explode("-", $request->input('City'))[1];
         $phone = $request->input('phone');
         $name = $request->input('name');
         $note = $request->input('note');

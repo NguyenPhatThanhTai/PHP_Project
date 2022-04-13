@@ -56,6 +56,7 @@
               <li class="list-group-item d-flex justify-content-between">
                 <span>Tổng (USD)</span>
                 <strong>{{$totalPrice}} VND</strong>
+                <input type="hidden" value="{{$totalPrice}}" name="totalPrice">
               </li>
             </ul>
               <div class="input-group">
@@ -226,16 +227,16 @@
     			    data = JSON.parse(data.responseText);
     			    listCity = data;
     			    listCity.forEach((x) =>{
-						$("#country").append('<option class="city" value="'+x.code+'">'+x.name+'</option>')
+						$("#country").append('<option class="city" value="'+x.code+'-'+x.name+'">'+x.name+'</option>')
 					})
 				}
     		  })
     		  
     		  $("#country").on("change", function(){
     			    $("#state").html("");
-			    	var state = listCity.find(y => y.code == $(this).val());
+			    	var state = listCity.find(y => y.code == $(this).val().split("-")[0]);
 			    	state.districts.forEach((x) =>{
-						$("#state").append('<option class="state" value="'+x.code+'">'+x.name+'</option>')
+						$("#state").append('<option class="state" value="'+x.name+'">'+x.name+'</option>')
 					})
     		  })
     		  
