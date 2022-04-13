@@ -338,4 +338,88 @@ class AdminController extends Controller
             return view('Pages.Admin.AdminDashboard');
         }
     }
+
+    // order management
+    public function OrderManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $AllOrder = $_serviceController->GetAllOrder();
+
+            return view('Pages.Admin.OrderManagement')
+                ->with('AllOrder', $AllOrder);
+        }
+    }
+
+    // get order json
+    public function GetOrderJson(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $OrderId = $request->get('id');
+            $Order = $_serviceController->GetOrderJson($OrderId);
+            $ListProduct = $_serviceController->GetListProduct($OrderId);
+            $ListProductModal = (object)["ListProduct" => $ListProduct, "Order" => $Order];
+
+            return response()->json($ListProductModal);
+        }
+    }
+
+    // set status order
+    public function SetStatusOrder(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $OrderId = $request->post('id');
+
+            $_serviceController->SetStatusOrder($OrderId);
+            return redirect('/OrderManagement');
+        }
+    }
+
+    // user management
+    public function UserManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+            $AllUser = $_serviceController->GetAllUser();
+
+            return view('Pages.Admin.UserManagement')
+                ->with('AllUser', $AllUser);
+        }
+    }
+
+    // disable user
+    public function postUserManagement(Request $request)
+    {
+        // check session admin
+        if ($_SESSION['Admin'] == null) {
+
+            return redirect('/FormLoginAdmin');
+        }else{
+            $_serviceController = new Service();
+
+            $UserId = $request->post('id');
+
+            $_serviceController->DisableUser($UserId);
+            return redirect('/UserManagement');
+        }
+    }
 }

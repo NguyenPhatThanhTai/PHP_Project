@@ -83,6 +83,20 @@ Route::post('/EditManufactor', [AdminController::class, 'postEditManufactor']);
 // delete manufactor
 Route::post('/DeleteManufactor', [AdminController::class, 'DeleteManufactor']);
 
+// order management
+Route::get('/OrderManagement', [AdminController::class, 'OrderManagement']);
+Route::post('/OrderManagement', [AdminController::class, 'postOrderManagement']);
+
+Route::get('/GetOrderJson', [AdminController::class, 'GetOrderJson']);
+
+// set status order
+Route::post('/SetStatusOrder', [AdminController::class, 'SetStatusOrder']);
+
+// user management
+Route::get('/UserManagement', [AdminController::class, 'UserManagement']);
+Route::post('/UserManagement', [AdminController::class, 'postUserManagement']);
+
+
 // Route::get('/page', function(){
 //     $data = (object) ["Num" => "Mot", "Num" => "Hai"];
 //     return view('page1', WellcomeController::class);

@@ -150,4 +150,38 @@ class Service{
         $_dataAccess = new DataAccess();
         return $_dataAccess->DeleteManufactor($id);
     }
+
+    // get all order
+    public function GetAllOrder(){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetAllOrder();
+    }
+
+    // get order json
+    public function GetOrderJson($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetOrderJson($id);
+    }
+    // get list product
+    public function GetListProduct($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetListProduct($id);
+    }
+    // set status order
+    public function SetStatusOrder($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->SetStatusOrder($id);
+    }
+
+    // user management
+    public function GetAllUser(){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->GetAllUser();
+    }
+
+    // disable user
+    public function DisableUser($id){
+        $_dataAccess = new DataAccess();
+        return $_dataAccess->DisableUser($id);
+    }   
 }

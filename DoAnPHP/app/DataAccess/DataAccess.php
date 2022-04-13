@@ -321,4 +321,53 @@ class DataAccess{
             return false;
         }
     }
+
+    // order management
+    public function GetAllOrder(){
+        $Order = DB::select("SELECT * FROM `orders`");
+
+        return $Order; 
+    }
+
+    // get order json
+    public function GetOrderJson($id){
+        $Order = DB::selectOne("SELECT orders.status, orders.id, orders.name_receive, orders.phone_receive, orders.address_receive, orders.note, orders.total_price FROM orders WHERE orders.id = " . $id);
+        
+        return $Order; 
+    }
+
+    // get list product
+    public function GetListProduct($id){
+        $ListProduct = DB::select("SELECT detail_orders.orders_id, product_detail.id, product_detail.name, detail_orders.quantity FROM product_detail INNER JOIN product on product_detail.product_id = product.id INNER JOIN detail_orders on detail_orders.product_id = product.id WHERE detail_orders.orders_id = " . $id);
+        
+        return $ListProduct; 
+    }
+    // set status order
+    public function SetStatusOrder($id){
+        try{
+            $order = DB::update("UPDATE `orders` SET `status` = -1 WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    // user management
+    public function GetAllUser(){
+        $User = DB::select("SELECT * FROM `customer` WHERE `status` = 0");
+
+        return $User; 
+    }
+
+    // disable user
+    public function DisableUser($id){
+        try{
+            $user = DB::update("UPDATE `customer` SET `status` = -1 WHERE `id` = '".$id."'");
+    
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }
