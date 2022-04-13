@@ -213,46 +213,7 @@
     </div>
     <!-- end special product -->
 
-    <!-- product list -->
-    <div class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>bán chạy nhất</h2>
-            </div>
-            <div class="row" id="best-products">
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-card-img">
-                            <img src="./images/bag14.jpg" alt="">
-                            <img src="./images/bag14_hover.jpg" alt="">
-                        </div>
-                        <div class="product-card-info">
-                            <div class="product-btn">
-                                <button class="btn-flat btn-hover btn-shop-now">xem ngay</button>
-                                <button class="btn-flat btn-hover btn-cart-add">
-                                    <i class='bx bxs-cart-add'></i>
-                                </button>
-                                <button class="btn-flat btn-hover btn-cart-add">
-                                    <i class='bx bxs-heart'></i>
-                                </button>
-                            </div>
-                            <div class="product-card-name">
-                                BAG SIMPLE YELLOW
-                            </div>
-                            <div class="product-card-price">
-                                <span><del>300.000 vnd</del></span>
-                                <span class="curr-price">200.000 VND</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-footer">
-                <a href="./products.html" class="btn-flat btn-hover">xem tất cả</a>
-            </div>
-        </div>
-    </div>
-    <!-- end product list -->
+    
 
     <!-- blogs -->
     <div class="section">

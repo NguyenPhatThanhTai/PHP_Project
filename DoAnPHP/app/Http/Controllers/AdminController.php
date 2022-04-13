@@ -36,6 +36,16 @@ class AdminController extends Controller
         }
     }
 
+    // admin dashboard
+    public function DashboardController(Request $request)
+    {
+        if (isset($_SESSION['Admin'])) {
+            return view('Pages.Admin.AdminDashboard');
+        } else {
+            return view('Pages.Admin.SigninAdmin');
+        }
+    }
+
     // product management
     public function ProductManagement(Request $request)
     {
@@ -77,7 +87,7 @@ class AdminController extends Controller
             $ProductImgDetail4 = $request->post('img_detail4');
             $ProductManufactor = $request->post('manufactor');
             $ProductCategory = $request->post('category');
-
+            
             $AddProduct = $_serviceController->AddProduct($ProductName, $ProductDescription, $ProductPrice, $ProductImgCover, $ProductImgHover, $ProductImgDetail1, $ProductImgDetail2, $ProductImgDetail3, $ProductImgDetail4, $ProductManufactor, $ProductCategory);
             if($AddProduct)
                 return redirect('/ProductManagement');
@@ -126,7 +136,6 @@ class AdminController extends Controller
             $ProductManufactor = $request->post('manufactor');
             $ProductCategory = $request->post('category');
             
-
             $EditProduct = $_serviceController->EditProduct($ProductId, $ProductDetailId, $ProductName, $ProductDescription, $ProductPrice, $ProductImgCover, $ProductImgHover, $ProductImgDetail1, $ProductImgDetail2, $ProductImgDetail3, $ProductImgDetail4, $ProductManufactor, $ProductCategory);
             if($EditProduct)
                 return redirect('/ProductManagement');

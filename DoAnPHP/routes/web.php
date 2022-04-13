@@ -50,6 +50,9 @@ Route::post('/page/test', [WelcomeController::class, 'testControllerPost']);
 Route::get('/FormLoginAdmin', [AdminController::class, 'LoginAdminController']);
 Route::post('/FormLoginAdmin', [AdminController::class, 'postLoginAdmin']);
 
+// admin dashboard
+Route::get('/AdminDashboard', [AdminController::class, 'DashboardController']);
+
 // product management
 Route::get('/ProductManagement', [AdminController::class, 'ProductManagement']);
 Route::post('/ProductManagement', [AdminController::class, 'postProductManagement']);

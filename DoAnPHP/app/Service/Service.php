@@ -81,7 +81,7 @@ class Service{
         $id = date("dhis");
         $idDetail = date("dhis");
 
-        return $_dataAccess->AddProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category, );
+        return $_dataAccess->AddProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $category, $manufactor );
     }
 
     // update product
@@ -92,7 +92,7 @@ class Service{
 
     public function EditProduct($id, $idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category){
         $_dataAccess = new DataAccess();
-        return $_dataAccess->EditProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $manufactor, $category);
+        return $_dataAccess->EditProductAdmin((int)$id, (int)$idDetail, $name, $description, $price, $img_cover, $img_hover, $img_detail1, $img_detail2, $img_detail3, $img_detail4, $category, $manufactor);
     }
 
     // delete product

@@ -50,6 +50,7 @@ class DataAccess{
         product_detail.description as 'ProductDescipsion',
         product_detail.price as 'ProductPrice',
         product_detail.img_detail1 as 'img_detail1',
+        product_detail.img_cover as 'img_cover',
         product_detail.img_detail2 as 'img_detail2',
         product_detail.img_detail3 as 'img_detail3',
         product_detail.img_detail4 as 'img_detail4',

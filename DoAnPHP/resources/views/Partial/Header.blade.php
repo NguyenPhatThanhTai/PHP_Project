@@ -2,7 +2,7 @@
 <header>
     <!-- mobile menu -->
     <div class="mobile-menu bg-second">
-        <a href="#" class="mb-logo">DTT Store</a>
+        <a href="/" class="mb-logo">DTT Store</a>
         <span class="mb-menu-toggle" id="mb-menu-toggle">
             <i class='bx bx-menu'></i>
         </span>

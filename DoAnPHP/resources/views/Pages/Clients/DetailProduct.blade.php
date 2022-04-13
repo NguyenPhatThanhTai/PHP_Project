@@ -85,7 +85,7 @@
                             </span>
                         </div>
                         <div>
-                            <button class="btn-flat btn-hover">Thêm vào giỏ hàng</button>
+                            <button class="btn-flat btn-hover" onclick="addToCart('{{$ProductDetail -> ProductDetailId}}', '{{$ProductDetail -> ProductPrice}}', '{{$ProductDetail -> img_cover}}', '{{$ProductDetail -> ProductName}}')">Thêm vào giỏ hàng</button>
                         </div>
                     </div>
                 </div>
@@ -147,8 +147,36 @@
 
 @section('scripts')
 <script type="text/javascript">
+          function addToCart(ProductId, Price, Img, Name){
+			$.ajax({
+				  type: 'POST',
+				  contentType : 'application/json; charset=utf-8',
+				  data: JSON.stringify({ 
+                    "_token": "{{ csrf_token() }}",
+			        "productId": ProductId, 
+			        "number": 1,
+			        "action": 0,
+			        "price": Price,
+			        "image": Img,
+			        "name": Name
+			      }),
+				  url: 'AddToCart',
+				  success: function (data) {
+                      data = JSON.parse(data);
+                      console.log(data);
+                        
+                        if(data.IsSuccess == "true"){
+                            alert("Thêm vào giỏ hàng thành công");
+                        }
+                        else{
+                            alert("Thêm vào giỏ hàng thất bại");
+                        }
+				  }
+			});	
+		}
     $(document).ready(function() {
         getAllComment();
+  
         
         $(".getRating").on("click", function(){
             $("#number-of-star").val($(this).val());
