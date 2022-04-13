@@ -102,8 +102,11 @@
                             <td>{{$item -> total_price}}</td>
                             <td>
                                 <button type="button" class="btn-delete" data-toggle="modal" data-target="#modalDel"
-                                    onclick="getInfoDetailOrder('{{$item -> id}}')"><i class='bx bx-search' ></i></button>
+                                    onclick="getInfoDetailOrder('{{$item -> id}}')"><i class='bx bx-search' ></i>
                                 </button>
+                                @if($item -> status == -1)
+                                        <i class='bx bx-check'></i>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -15,7 +15,7 @@
     <!-- bootstrap -->
     <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- logo -->
-    <link rel="icon" href="./images/TTDStore_logo.png">
+    <link rel="icon" href="{{ asset('images/TTDStore_logo.png') }}">
     <!-- css -->
     <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
     <link rel="stylesheet" href="{{ asset('css/order.css') }}">
@@ -28,7 +28,6 @@
 @stop
 
 @section('content')
-{{var_dump($_SESSION['Customer']->id);}}
 <form action="Order" method="post">
 @csrf
   <div class="container">

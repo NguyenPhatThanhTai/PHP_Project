@@ -13,7 +13,7 @@
 <!-- box icons -->
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <!-- logo -->
-<link rel="icon" href="./images/TTDStore_logo.png">
+<link rel="icon" href="{{ asset('images/TTDStore_logo.png') }}">
 <!-- css -->
 <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
 <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
@@ -52,7 +52,7 @@
         <div class="col-12 col-md-12 col-sm-12">
             <div class="text-price">
                 <h3>Thành tiền: <span id="totalPrice">0</span></h3>
-                <button class="btn-flat btn-hover complete-cart"><span>Đặt hàng</span></button>
+                <button class="btn-flat btn-hover complete-cart" onclick="window.location='/Order'"><span>Đặt hàng</span></button>
             </div>
         </div>
     </div>

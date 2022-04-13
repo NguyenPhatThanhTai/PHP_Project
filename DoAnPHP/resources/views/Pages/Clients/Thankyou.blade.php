@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>DTT Store - Balo Shop</title>
     <!-- icon -->
-    <link rel="shortcut icon" href="./images/TTDStore_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/TTDStore_logo.png') }}" type="image/x-icon">
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' type='text/css'>
 	<style>
 		@import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);

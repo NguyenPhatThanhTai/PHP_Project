@@ -14,7 +14,7 @@
     <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <!-- logo -->
-    <link rel="icon" href="images/logo.png">
+    <link rel="icon" href="{{ asset('images/TTDStore_logo.png') }}">
     <!-- css -->
     <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

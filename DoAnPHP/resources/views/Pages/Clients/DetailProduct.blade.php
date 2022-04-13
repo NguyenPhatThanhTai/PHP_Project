@@ -13,7 +13,7 @@
 <!-- boxicons -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 <!-- logo -->
-<link rel="icon" href="images/logo.png />">
+<link rel="icon" href="{{ asset('images/TTDStore_logo.png') }} ">
 <!-- app css -->
 <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
 <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="box">
                 <div class="breadcumb">
-                    <a href="./index.html">trang chủ</a>
+                    <a href="#">trang chủ</a>
                     <span><i class='bx bxs-chevrons-right'></i></span>
                     <a href="./products.html">Chi tiết sản phẩm</a>
                     <span><i class='bx bxs-chevrons-right'></i></span>
