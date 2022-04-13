@@ -58,7 +58,7 @@
                     <i class='bx bx-search-alt'></i>
                 </div>
                 <ul class="user-menu">
-                    <li><a href="#"><i class='bx bx-bell'></i></a></li>
+                    <li><a href="{{ url('FormLogin')}}"><i class='bx bx-log-in'></i></i></a></li>
                     <li><a href="#"><i class='bx bx-user-circle'></i></a></li>
                     <li><a href="{{ url('Cart')}}"><i class='bx bx-cart'></i></a></li>
                 </ul>

@@ -35,7 +35,7 @@ class ClientController extends Controller
         $offset = $request->get('offset');
         $cateid = $request->get('cateid');
 
-        $Total = 10;
+        $Total = 9;
         $Current_Page = $offset;
 
         if ($offset == 1) {
@@ -52,8 +52,8 @@ class ClientController extends Controller
         $AllCategory = $_serviceController->GetAllCategory();
 
         $CountProduct = sizeof($AllProduct);
-        (float) $CountProductsCalculator = $CountProduct / $Total;
-        $CountProducts = $CountProductsCalculator + 2;
+        $CountProductsCalculator = $CountProduct / $Total;
+        $CountProducts = $CountProductsCalculator + $Current_Page;
 
         return view('Pages.Clients.AllProduct')
             ->with('AllCategory', $AllCategory)

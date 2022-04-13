@@ -264,7 +264,7 @@
                                                 </button>
                                             </div>
                                             <div class="product-card-name">
-                                                {{$item -> categoryId}}
+                                                {{$item -> name}} 
                                             </div>
                                             <div class="product-card-price">
                                                 <span><del>{{$item->price + ($item->price)/2}}</del></span>

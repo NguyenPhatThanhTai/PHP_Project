@@ -27,10 +27,10 @@ class DataAccess{
                 ON product.id = product_detail.product_id where product_detail.status = 0";
 
         if($cateId != null && count($cateId) == 1){
-            $Query .= ' WHERE product.category_id = ' . str_replace("\\s+", "", $cateId[0]);
+            $Query .= ' AND product.category_id = ' . str_replace("\\s+", "", $cateId[0]);
         }
         else if($cateId != null && count($cateId) > 1){
-            $Query .= ' WHERE product.category_id = ' . str_replace("\\s+", "", $cateId[0]);
+            $Query .= ' AND product.category_id = ' . str_replace("\\s+", "", $cateId[0]);
             foreach($cateId as $item){
                 if($item != ''){
                     $Query .= ' OR product.category_id = ' . $item . '';
@@ -88,13 +88,13 @@ class DataAccess{
     }
 
     public function GetAllCategory(){
-        $Category = DB::select("select * from category");
+        $Category = DB::select("select * from category where category.status = 0");
 
         return $Category;
     }
 
     public function GetAllManufactor(){
-        $Manufactor = DB::select("select * from manufacturers");
+        $Manufactor = DB::select("select * from manufacturers  where manufacturers.status = 0");
 
         return $Manufactor;
     }

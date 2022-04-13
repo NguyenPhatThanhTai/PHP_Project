@@ -43,7 +43,7 @@ class Service{
     public function GetAllProduct($offset,array $cateId){
         $_dataAccess = new DataAccess();
 
-        return $_dataAccess->GetProductByNumber($offset, 10 , $cateId);
+        return $_dataAccess->GetProductByNumber($offset, 9 , $cateId);
     }
 
     // admin login
